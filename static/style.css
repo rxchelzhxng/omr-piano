@@ -1,0 +1,134 @@
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  position:sticky;
+  top:0;
+  background-color:#272727;
+  border-radius: 2px;
+}
+
+nav .container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+  }
+  nav .container ul li {
+  display: inline-block;
+  border-radius:5px;
+  }
+
+nav .container ul li a {
+  display:inline-block;
+  font-size: 1.5rem; 
+  padding:10px 20px;
+  color:rgb(255, 255, 255);
+  text-decoration:none;
+    
+}
+
+nav .container ul li a:hover{
+  color:rgb(23, 143, 255);
+  border-bottom: 3px solid rgb(23, 143, 255);
+}
+             
+    
+nav .container ul li.active {
+    transition:all 0.3s ease-in-out;
+    color:rgb(23, 143, 255);
+    border-bottom: 3px solid rgb(23, 143, 255);
+    
+}
+
+nav .container ul li.active a {
+  color:rgb(23, 143, 255);
+}
+
+section{
+  height: 20vh; 
+  width: 100%;
+  background-color:#dfdbdb; 
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#home{ 
+background:#dfdbdb;  
+}
+
+
+#howItWorks{
+background:#dfdbdb;
+}
+
+#result{ 
+background:#dfdbdb;
+} 
+
+h1 {
+  font-size: 2.5rem; 
+  color: black; 
+}
+
+p {
+  font-size: 1.6rem; 
+}
+
+.submission {
+  display: inline; 
+  margin: 0; 
+  padding: 10px 20px; 
+}
+
+#file-js {
+  font-size: 3rem;  
+  margin: 0; 
+  
+}
+
+.file-input {
+  padding: 10px 10px; 
+}
+
+.button.is-primary{
+  background-color:rgb(23, 143, 255);
+  color:#fff;
+  padding: 10px 10px; 
+  border-radius: 2px; 
+  
+}
+
+.button.is-primary:hover{
+  background-color:rgb(23, 143, 255);
+  color:#fff;
+  cursor:pointer;
+}
+
+.model-info a {
+  font-size: 2rem; 
+  color: black;  
+  text-decoration: none; 
+  font-weight: bold; 
+}
+
+.model-img {
+  margin-top: 50px; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.model-citation {
+  font-style: italic; 
+  font-size: 1rem; 
+  color: black; 
+  text-align: center;
+}

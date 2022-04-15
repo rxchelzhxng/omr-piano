@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Required meta tags-->
+    <meta charset="UTF-8">
+    <title>OMR-Piano-App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content=""/>
+    <meta name="description" content="" />
+
+    <link rel="stylesheet" href="../static/style.css">
+    
+</head>
+<body style="background-color: #dfdbdb">
+    <!-- ==== Header ==== -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li class="home active">
+                    <a href="#home">Home</a>
+                </li>
+                <li class="howitworks">
+                    <a href=#howitworks>How it works</a>
+                </li>
+                <li class="result">
+                    <a href="#result">Result</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section id="home">
+        <h1>Optical Music Recognition (OMR) Application</h1>
+    </section>
+        <p>A web application to transcribe music scores to ABC notation to facilitate the process of learning piano.</p>
+    <div class="submission">
+        <h1>Upload your sheet music</h1>
+        <form action="{{ url_for('make_predictions') }}" method="post" enctype="multipart/form-data">
+            <div id="file-js">
+                <label class="file-submission">
+                    <input class="file-input" type="file" name="file">
+                </label>
+            </div>
+ 
+            <!-- File upload logic -->
+            <script>
+                const fileUpload = document.querySelector('#file-js input[type=file]');
+                fileUpload.onchange = () => {
+                    if (fileUpload.files.length > 0) {
+                        const fileName = document.querySelector('#file-js .file-name');
+                        fileName.textContent = fileInput.files[0].name;
+                 }
+             }
+            </script>
+            <br>
+            <br>
+            <input class="button is-primary" type="submit" value="Transcribe uploaded sheet!">
+        </form>
+    </div>
+    <section id="howitworks">
+    <h1>How it works</h1>
+    </section>
+    <div class="model-info">
+        <p>Optical Music Recognition (OMR) is an emerging field of machine learning that learns how to computationally decode music notation from images. The goal of this project is to train the computer to recognize music scores and annotate them respectively. </p>
+        <br>
+        <a href="https://www.mdpi.com/2076-3417/8/4/606/htm">The Deep Learning Model</a>
+        <p>A convolutional neural network (CNN) is used for feature extraction of the input image, then the recurrent neural network (RNN) produces the sequences of music symbols. Both networks are join leading to the formation of a convolutional recurrent neural network (CRNN). 
+            Lastly, the connectionist temporal classification (CTC) loss function is used to optimize the CRNN parameters. All together this framework aims to solve the OMR task on printed single-staff monodic scores.
+            <br>In addition, the Printed Images of Music Staves (PrIMuS) dataset is introduced for the making of training and validation sets.
+        </p>
+        <img class="model-img" src="../model.jpg", alt="Deep Learning Model">
+        <p class="model-citation">Calvo-Zaragoza, J., & Rizo, D. (2018). End-to-End Neural Optical Music Recognition of Monophonic Scores. Applied Sciences, 8(4), 606. https://doi.org/10.3390/app8040606</p>
+    </div>
+    <section id="result">
+        <h1>Result</h1>
+    </section>
+
+
+   <!-- ===== Submit file ==== -->
+   <script type="txt/javascript" src="../js/main.js"></script>
+   
+    
+</body>
+</html>
