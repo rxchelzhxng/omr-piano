@@ -8,7 +8,7 @@
     <meta name="keywords" content=""/>
     <meta name="description" content="" />
 
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     
 </head>
 <body style="background-color: #dfdbdb">
@@ -63,16 +63,29 @@
         <p>Optical Music Recognition (OMR) is an emerging field of machine learning that learns how to computationally decode music notation from images. The goal of this project is to train the computer to recognize music scores and annotate them respectively. </p>
         <br>
         <a href="https://www.mdpi.com/2076-3417/8/4/606/htm">The Deep Learning Model</a>
-        <p>A convolutional neural network (CNN) is used for feature extraction of the input image, then the recurrent neural network (RNN) produces the sequences of music symbols. Both networks are join leading to the formation of a convolutional recurrent neural network (CRNN). 
-            Lastly, the connectionist temporal classification (CTC) loss function is used to optimize the CRNN parameters. All together this framework aims to solve the OMR task on printed single-staff monodic scores.
+        <p>A convolutional neural network (CNN) is used for feature extraction of the input image, then the recurrent neural network (RNN) produces the sequences of music symbols. Both networks are joined, leading to the formation of a convolutional recurrent neural network (CRNN). 
+            Lastly, the connectionist temporal classification (CTC) loss function is used to optimize the CRNN parameters. All together this framework aims to solve the OMR task on printed single-staff monophonic scores.
             <br>In addition, the Printed Images of Music Staves (PrIMuS) dataset is introduced for the making of training and validation sets.
         </p>
-        <img class="model-img" src="../model.jpg", alt="Deep Learning Model">
+        <img class="model-img" src="model.jpg" alt="Deep Learning Model">
         <p class="model-citation">Calvo-Zaragoza, J., & Rizo, D. (2018). End-to-End Neural Optical Music Recognition of Monophonic Scores. Applied Sciences, 8(4), 606. https://doi.org/10.3390/app8040606</p>
     </div>
     <section id="result">
         <h1>Result</h1>
     </section>
+    {% if final_result %}
+    <img class="annotated" src="/annotated.jpg">
+    <br>
+    <form action="{{ url_for('index')}}">
+        <input class="button is-primary" type="submit" value="Read another sheet">
+    </form>
+    {% else %}
+    <div class="no-result">
+        <p>No image has been uploaded. Please upload an image for transcribing</p>
+    </div>
+    {% endif %}
+    <br>
+
 
 
    <!-- ===== Submit file ==== -->
