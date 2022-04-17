@@ -1,4 +1,4 @@
-#omr-piano
+# omr-piano
 
 Optical Music Recognition (OMR) web application that transcribes musical notes on monophonic scores to ABC notation and annotates them onto the scores for aiding the process of learning piano.
 
