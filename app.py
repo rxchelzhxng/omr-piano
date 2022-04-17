@@ -73,7 +73,7 @@ def make_predictions():
         w = width / 9
         for n in notes:
             draw.text((w, height-40), n, fill=(0, 0, 0), font=font)
-            w += (width / (len(notes) + 4.2))
+            w += (width / (len(notes) + 2.2))
         new_image.save("static/annotated.jpg")
      
         return render_template('index.html', final_result=True)
