@@ -2,6 +2,8 @@
 
 Optical Music Recognition (OMR) web application that transcribes musical notes on monophonic scores to ABC notation and annotates them onto the scores for aiding the process of learning piano.
 
+![Annotated example](https://github.com/rxchelzhxng/omr-piano/blob/main/examples/annotated.jpg)
+
 # How it works
 The web app is created with Flask on a tensorflow model built by Calvo-Zaragoza et al. on their work [End-to-End Neural Optical Music Recognition of Monophonic Scores](https://www.mdpi.com/2076-3417/8/4/606).
 
