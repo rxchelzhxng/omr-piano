@@ -49,14 +49,22 @@ def make_predictions():
             notes_arr.append(index_word[idx])
         # Extract monophonic notes
         notes = []
+        durations = []
         for note in notes_arr:
             # Check if score is a note
             if note[0:5] == "note-":
                 # Append only the ABC notation note
                 if not note[6].isdigit():
                     notes.append(note[5:7])
+                    # Get note duration
+                    note_duration = note.split('_')[1]
+                    durations.append(note_duration)
                 else:
                     notes.append(note[5])
+                    note_duration = note.split('_')[1]
+                    durations.append(note_duration)
+            if note == "barline":
+                durations.append(note)
         
         # Extract image width and height
         image_size = (image.size[0], int(image.size[1]*1.5))
@@ -67,13 +75,72 @@ def make_predictions():
         height = int(new_imarr.shape[0])
         width = int(new_imarr.shape[1])
         
-        # Annotate scores onto image
         draw = ImageDraw.Draw(new_image)
         font = ImageFont.truetype("ABeeZee-Regular.otf", 22)
+        # Initial width
         w = width / 9
-        for n in notes:
-            draw.text((w, height-40), n, fill=(0, 0, 0), font=font)
-            w += (width / (len(notes) + 2.2))
+        
+        # Initialize barline duration
+        bar = -3
+        
+        # Intialize note durations
+        whole = -0.5
+        half = 0 #(1/2 - 0.3)
+        quarter = 0.5
+        eighth = 1
+        sixteenth = 1.5
+        consecutive = 3
+        
+        # Initialize spacing to be iterated over
+        spacing = 0
+          
+        # Annotate scores onto image
+        note_index = 0
+        first_note = True # boolean for encountering first note
+        add_bar = False # boolean for encountering a barline
+        for i in range(len(durations)):
+            # Check if encountered barline
+            if durations[i] == 'barline':
+                spacing += bar
+                add_bar = True
+                
+            else:
+                if (first_note is not True) and (add_bar is not True):
+                    # Check if note is dotted
+                    if "." in durations[i]:
+                        n_dots = durations[i].count('.') * 3.5
+                        spacing -= (pow(2, n_dots))
+                        
+        
+                    # Check note duration            
+                    if "whole" in durations[i]:
+                        spacing += pow(2, whole)
+                    elif "half" in durations[i]:
+                        spacing += pow(2, half)
+                        
+                    elif "quarter" in durations[i]:
+                        spacing += pow(2, quarter)
+                    elif "eighth" in durations[i]:
+                        # Check if there are consecutive eight notes
+                        if ("eight" in durations[i+1]) & ("eight" in durations[i+2]):
+                            spacing += pow(2, consecutive)
+                        spacing += pow(2, eighth)
+                    elif "sixteenth" in durations[i]:
+                        spacing += pow(2, sixteenth)
+                        
+                    # Update width for note
+                    w += ( width / (len(notes) + spacing))
+                    
+                # Update barline width if encountered barline
+                if add_bar is True:
+                    w += ( width / (len(notes) + spacing))
+                    add_bar = False
+               
+                draw.text((w, height-40), notes[note_index], fill=(0, 0, 0), font=font)
+                
+                first_note = False
+                note_index += 1
+                
         new_image.save("static/annotated.jpg")
      
         return render_template('index.html', final_result=True)
